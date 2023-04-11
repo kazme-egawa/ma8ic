@@ -1,8 +1,10 @@
 #include QMK_KEYBOARD_H
 #include "quantum.h"
 
-#define _QWERTY       0
-#define _FUNC         1
+#define _QWERTY 0
+#define _FUNC   1
+#define _MOUSE  2
+#define _LED    3
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT( \
@@ -15,21 +17,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
         KC_LSFT,  KC_Z,    KC_X,     KC_C,    KC_V,     KC_B,                     KC_B,    KC_N,     KC_M,   KC_COMM,  KC_DOT, KC_SLSH,   KC_UP,  KC_GRV,
     //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
-        KC_LCTL,MO(_FUNC), KC_LALT, KC_LGUI,  KC_ESC,   KC_SPC,                             KC_ENT,  KC_DEL,  KC_RGUI, KC_RALT, KC_LEFT,  KC_DOWN, KC_RGHT
+        KC_LCTL,MO(_FUNC),KC_LALT, KC_LGUI, MO(_MOUSE),KC_SPC,                             KC_ENT,  KC_DEL,  KC_RGUI,MO(_LED), KC_LEFT,  KC_DOWN, KC_RGHT
     //,--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
     ),
 
     [_FUNC] = LAYOUT( \
     //,--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
-        KC_ESC  , KC_F1  , KC_F2   , KC_F3  , KC_F4   , KC_F5   , KC_F6  ,                 KC_F7    , KC_F8   , KC_F9  ,KC_F10 , KC_F11  , KC_F12,  RGB_TOG,
+        KC_TRNS , KC_F1  , KC_F2   , KC_F3  , KC_F4   , KC_F5   , KC_F6  ,                 KC_F7 , KC_F8   , KC_F9  ,  KC_F10 , KC_F11 , KC_F12  , KC_TRNS,
     //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
-        KC_NO   , KC_NO  , KC_NO   , KC_NO  , KC_NO   , KC_NO  , KC_NO   ,         KC_NO  , KC_NO  , KC_NO  , KC_NO   , KC_NO  , KC_NO   , KC_NO   , KC_NO,
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS ,       KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS,
     //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
-        KC_NO   , KC_NO  , KC_NO   , KC_NO  , KC_NO   ,KC_NO   ,                   KC_NO  , KC_NO  , KC_NO  , KC_NO   , KC_NO  , KC_NO   , KC_NO   , KC_NO,
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                          KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS,
     //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
-        KC_NO   , KC_NO  , KC_NO   , KC_NO  , KC_NO   , KC_NO  ,                            KC_NO  , KC_NO , KC_NO   , KC_NO  , KC_NO   , RGB_VAI  , KC_NO,
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                 KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS,
     //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
-        KC_NO, MO(_FUNC) , KC_NO   , KC_NO  , KC_NO   , KC_NO  ,                            KC_NO  , KC_NO , KC_NO   , KC_NO , RGB_HUD  , RGB_VAD  , RGB_HUI
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                          KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS
+    //,--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+    ),
+
+    [_MOUSE] = LAYOUT( \
+    //,--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS ,                KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS,
+    //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS ,       KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS,
+    //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                          KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS,KC_MS_WH_UP,KC_MS_BTN3,KC_MS_WH_DOWN,
+    //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                 KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS,KC_MS_BTN1,KC_MS_UP,KC_MS_BTN2,
+    //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                          KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS,KC_MS_LEFT,KC_MS_DOWN,KC_MS_RIGHT
+    //,--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+    ),
+
+    [_LED] = LAYOUT( \
+    //,--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS ,                KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , RGB_TOG,
+    //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS ,       KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS,
+    //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                          KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS,
+    //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                 KC_TRNS, KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, RGB_SAD, RGB_VAI , RGB_SAI,
+    //|--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
+        KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS, KC_TRNS , KC_TRNS,                          KC_TRNS, KC_TRNS , KC_TRNS , KC_TRNS, RGB_HUD, RGB_VAD , RGB_HUI
     //,--------+--------+---------+--------+---------+--------+---------/     /,--------+---------+--------+---------+--------+--------+---------+--------.
     ),
 };
@@ -254,6 +284,12 @@ static void print_status_narrow(void) {
         case _FUNC:
             oled_write("FUNC", false);
             break;
+        case _MOUSE:
+            oled_write("MOUSE", false);
+            break;
+        case _LED:
+            oled_write("LED", false);
+            break;
         default:
             oled_write("UNDEF", false);
     }
@@ -270,7 +306,13 @@ static void print_status_narrow(void) {
             oled_write("Base  ", false);
             break;
         case _FUNC:
-            oled_write("Func ", false);
+            oled_write("Func  ", false);
+            break;
+        case _MOUSE:
+            oled_write("Mouse ", false);
+            break;
+        case _LED:
+            oled_write("LED   ", false);
             break;
         default:
             oled_write("Undef ", false);
