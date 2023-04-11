@@ -22,5 +22,8 @@ RGB_MATRIX_DRIVER = WS2812
 WPM_ENABLE = yes
 
 # Disable other features to squeeze firmware size
+LTO_ENABLE = yes
 SPACE_CADET_ENABLE = no
+GRAVE_ESC_ENABLE = no
 MAGIC_ENABLE = no
+AUDIO_ENABLE = no
